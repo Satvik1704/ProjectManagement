@@ -1,7 +1,7 @@
 import express from "express";
-import { registerUser } from "../controllers/auth.controllers.js";
+import { login, registerUser } from "../controllers/auth.controllers.js";
 import { validate } from "../middlewares/validator.middleware.js";
-import { userRegisterValidator } from "../validators/index.js";
+import { userLoginValidator, userRegisterValidator } from "../validators/index.js";
 
 const router = express.Router();
 
@@ -11,5 +11,8 @@ router.post(
   validate,               // <-- no ()
   registerUser
 );
+router.route("/login").post(userLoginValidator(), validate, login)
+
+
 
 export default router;
